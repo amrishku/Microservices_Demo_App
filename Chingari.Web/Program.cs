@@ -22,14 +22,14 @@ builder.Services.AddAuthentication(options =>
                 {
                     options.Authority = builder.Configuration.GetSection("ServiceUrls:IdentityAPI").Get<string>();
                     options.GetClaimsFromUserInfoEndpoint = true;
-                    options.ClientId = "mango";
+                    options.ClientId = "chingari";
                     options.ClientSecret = "secret";
                     options.ResponseType = "code";
-                    options.ClaimActions.MapJsonKey("role", "role", "role");
-                    options.ClaimActions.MapJsonKey("sub", "sub", "sub");
+                    //options.ClaimActions.MapJsonKey("role", "role", "role");
+                    //options.ClaimActions.MapJsonKey("sub", "sub", "sub");
                     options.TokenValidationParameters.NameClaimType = "name";
                     options.TokenValidationParameters.RoleClaimType = "role";
-                    options.Scope.Add("mango");
+                    options.Scope.Add("chingari");
                     options.SaveTokens = true;
 
                 });
@@ -48,7 +48,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
+app.UseAuthentication();    
 app.UseAuthorization();
 
 app.MapControllerRoute(
