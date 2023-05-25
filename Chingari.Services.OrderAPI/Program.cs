@@ -1,26 +1,28 @@
-using AutoMapper;
-using Chingari.Services.ProductAPI;
-using Chingari.Services.ProductAPI.DbContexts;
-using Chingari.Services.ProductAPI.Repository;
-using Microsoft.AspNetCore.Identity;
+using Chingari.Services.OrderAPI.DbContexts;
+using Chingari.Services.OrderAPI.Extension;
+using Chingari.Services.OrderAPI.Messaging;
+using Chingari.Services.OrderAPI.Repository;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("DefaultConnection")
     ));
 
-IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
-builder.Services.AddSingleton(mapper);
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+
+var optionBuilder = new DbContextOptionsBuilder<ApplicationDbContext>();
+optionBuilder.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
+builder.Services.AddSingleton(new OrderRepository(optionBuilder.Options));
+
+builder.Services.AddSingleton<IAzureServiceBusConsumer, AzureServiceBusConsumer>();
+
+builder.Services.AddControllers();
 
 builder.Services.AddAuthentication("Bearer")
             .AddJwtBearer("Bearer", options =>
@@ -33,17 +35,18 @@ builder.Services.AddAuthentication("Bearer")
             });
 builder.Services.AddAuthorization(options =>
 {
- options.AddPolicy("ApiScope", policy =>
- {
-     policy.RequireAuthenticatedUser();
-     policy.RequireClaim("scope", "chingari");
- });
+    options.AddPolicy("ApiScope", policy =>
+    {
+        policy.RequireAuthenticatedUser();
+        policy.RequireClaim("scope", "chingari");
+    });
 });
+
+// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Chingari.Services.ProductAPI", Version = "v1" });
-    c.EnableAnnotations();
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Chingari.Services.OrderAPI", Version = "v1" });
     c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Description = @"Enter 'Bearer' [space] and your token",
@@ -86,5 +89,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
+app.UseAzureServiceBusConsumer();
 app.Run();
+
+

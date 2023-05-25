@@ -2,6 +2,7 @@ using Chingari.Web.Services.IServices;
 using Chingari.Web.Services;
 using Chingari.Web;
 using Microsoft.AspNetCore.Authentication;
+using Chingari.MessageBus;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddHttpClient<IProductService, ProductService>();
 SD.ProductAPIBase = builder.Configuration.GetSection("ServiceUrls:ProductAPI").Get<string>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddSingleton<IMessageBus, AzureServiceBusMessageBus>();
 
 builder.Services.AddControllersWithViews();
 

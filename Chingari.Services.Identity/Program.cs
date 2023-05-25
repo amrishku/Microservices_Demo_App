@@ -2,6 +2,7 @@ using Chingari.Services.Identity;
 using Chingari.Services.Identity.DbContexts;
 using Chingari.Services.Identity.Initializer;
 using Chingari.Services.Identity.Models;
+using Chingari.Services.Identity.Services;
 using Duende.IdentityServer.AspNetIdentity;
 using Duende.IdentityServer.Services;
 using Microsoft.AspNetCore.Identity;
@@ -32,6 +33,7 @@ var builderObj = builder.Services.AddIdentityServer(options =>
 
 builderObj.AddDeveloperSigningCredential();
 builder.Services.AddScoped<IDbInitializer, DbInitializer>();
+builder.Services.AddScoped<IProfileService, ProfileService>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

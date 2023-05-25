@@ -5,13 +5,19 @@ VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FrontEnd", "FrontEnd", "{00FDD041-A1AD-4BFE-A781-277C57FBB4D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chingari.Web", "Chingari.Web\Chingari.Web.csproj", "{DB068F10-086F-487A-B06F-7A34B850D999}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chingari.Web", "Chingari.Web\Chingari.Web.csproj", "{DB068F10-086F-487A-B06F-7A34B850D999}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{3CD6B586-2836-490E-8D0D-2B9EDFAF6C31}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chingari.Services.ProductAPI", "Chingari.Services.ProductAPI\Chingari.Services.ProductAPI.csproj", "{08B83545-DAA2-4A75-8063-FB5533D94676}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chingari.Services.ProductAPI", "Chingari.Services.ProductAPI\Chingari.Services.ProductAPI.csproj", "{08B83545-DAA2-4A75-8063-FB5533D94676}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chingari.Services.Identity", "Chingari.Services.Identity\Chingari.Services.Identity.csproj", "{1DC17A1D-7E28-4CFE-8B88-01A74781C3CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chingari.Services.Identity", "Chingari.Services.Identity\Chingari.Services.Identity.csproj", "{1DC17A1D-7E28-4CFE-8B88-01A74781C3CC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration", "{F1EE87C3-202A-4C23-9173-782E5BFD2AA4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chingari.MessageBus", "Chingari.MessageBus\Chingari.MessageBus.csproj", "{88E69A71-D5FF-45EA-83C2-D48461A1A9D2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Chingari.Services.OrderAPI", "Chingari.Services.OrderAPI\Chingari.Services.OrderAPI.csproj", "{AC57970D-9B7F-4991-BF19-A2C259CC81C1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +37,14 @@ Global
 		{1DC17A1D-7E28-4CFE-8B88-01A74781C3CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1DC17A1D-7E28-4CFE-8B88-01A74781C3CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1DC17A1D-7E28-4CFE-8B88-01A74781C3CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88E69A71-D5FF-45EA-83C2-D48461A1A9D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88E69A71-D5FF-45EA-83C2-D48461A1A9D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88E69A71-D5FF-45EA-83C2-D48461A1A9D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88E69A71-D5FF-45EA-83C2-D48461A1A9D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC57970D-9B7F-4991-BF19-A2C259CC81C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC57970D-9B7F-4991-BF19-A2C259CC81C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC57970D-9B7F-4991-BF19-A2C259CC81C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC57970D-9B7F-4991-BF19-A2C259CC81C1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,6 +53,8 @@ Global
 		{DB068F10-086F-487A-B06F-7A34B850D999} = {00FDD041-A1AD-4BFE-A781-277C57FBB4D1}
 		{08B83545-DAA2-4A75-8063-FB5533D94676} = {3CD6B586-2836-490E-8D0D-2B9EDFAF6C31}
 		{1DC17A1D-7E28-4CFE-8B88-01A74781C3CC} = {3CD6B586-2836-490E-8D0D-2B9EDFAF6C31}
+		{88E69A71-D5FF-45EA-83C2-D48461A1A9D2} = {F1EE87C3-202A-4C23-9173-782E5BFD2AA4}
+		{AC57970D-9B7F-4991-BF19-A2C259CC81C1} = {3CD6B586-2836-490E-8D0D-2B9EDFAF6C31}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1BF2F545-F552-4592-AA7D-29B0AEDD9781}
