@@ -1,3 +1,4 @@
+using Chingari.MessageBus;
 using Chingari.Services.OrderAPI.DbContexts;
 using Chingari.Services.OrderAPI.Extension;
 using Chingari.Services.OrderAPI.Messaging;
@@ -21,6 +22,7 @@ optionBuilder.UseSqlServer(builder.Configuration.GetConnectionString("DefaultCon
 builder.Services.AddSingleton(new OrderRepository(optionBuilder.Options));
 
 builder.Services.AddSingleton<IAzureServiceBusConsumer, AzureServiceBusConsumer>();
+builder.Services.AddSingleton<IMessageBus, AzureServiceBusMessageBus>();
 
 builder.Services.AddControllers();
 

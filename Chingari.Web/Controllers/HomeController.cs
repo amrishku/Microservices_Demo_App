@@ -50,8 +50,14 @@ namespace Chingari.Web.Controllers
         public async Task<IActionResult> DetailsPost(ProductDto productDto)
         {
             //send message in azure service bus
+            productDto.MessageCreated = DateTime.Now;
             await _messageBus.PublishMessage(productDto, "checkoutmessagetopic");
-            return View(productDto);
+            return RedirectToAction("Confirmation");
+        }
+
+        public async Task<IActionResult> Confirmation()
+        {
+            return View();
         }
 
         public IActionResult Privacy()

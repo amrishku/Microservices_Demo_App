@@ -20,5 +20,23 @@ namespace Chingari.Services.OrderAPI.Repository
             await _db.SaveChangesAsync();
             return true;
         }
+
+        public async Task<IEnumerable<OrderDetails>> GetOrderList()
+        {
+            await using var _db = new ApplicationDbContext(_dbContext);
+            List<OrderDetails> orderList = await _db.OrderDetails.ToListAsync();
+            return orderList;
+        }
+
+        public async Task UpdateOrderPaymentStatus(int orderHeaderId, bool paid)
+        {
+            await using var _db = new ApplicationDbContext(_dbContext);
+            var orderHeaderFromDb = await _db.OrderDetails.FirstOrDefaultAsync(u => u.Id == orderHeaderId);
+            if (orderHeaderFromDb != null)
+            {
+                orderHeaderFromDb.PaymentStatus = paid;
+                await _db.SaveChangesAsync();
+            }
+        }
     }
 }

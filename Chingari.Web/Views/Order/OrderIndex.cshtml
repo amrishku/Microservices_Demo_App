@@ -1,0 +1,60 @@
+﻿@model IEnumerable<Chingari.Web.Models.ProductDetails>
+
+<br />
+<br />
+<div class="container p-4 border">
+    <div class="row pb-2">
+        <div class="col">
+            <h1 class="text-primary">All Order List</h1>
+        </div>
+        @*<div class="col text-end pt-1">
+            <a asp-action="ProductCreate" class="btn btn-outline-primary"><i class="fas fa-plus"></i> Create New Product</a>
+        </div>*@
+    </div>
+    <table class="table" style="width:100%">
+        <thead>
+            <tr>
+                <th class="w-20">
+                    Name
+                </th>
+                <th class="w-15">
+                    Category Name
+                </th>
+                <th class="w-20">
+                    Price
+                </th>
+                <th class="w-30">
+                    OrderTime
+                </th>
+                <th class="w-15"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.CategoryName
+                    </td>
+                    <td>
+                        @((item.Price).ToString("c"))
+                    </td>
+                    <td>
+                        @item.MessageCreated
+                    </td>
+                    <td>
+                        <a  class="btn btn-success" asp-route-productId="@item.Id">
+                            Process
+                        </a>
+                        <a  class="btn btn-danger" asp-route-productId="@item.Id">
+                            Reject
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -9,7 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddHttpClient<IProductService, ProductService>();
 SD.ProductAPIBase = builder.Configuration.GetSection("ServiceUrls:ProductAPI").Get<string>();
+SD.OrderAPIBase = builder.Configuration.GetSection("ServiceUrls:OrderAPI").Get<string>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddSingleton<IMessageBus, AzureServiceBusMessageBus>();
 
 builder.Services.AddControllersWithViews();
@@ -27,8 +29,8 @@ builder.Services.AddAuthentication(options =>
                     options.ClientId = "chingari";
                     options.ClientSecret = "secret";
                     options.ResponseType = "code";
-                    //options.ClaimActions.MapJsonKey("role", "role", "role");
-                    //options.ClaimActions.MapJsonKey("sub", "sub", "sub");
+                    options.ClaimActions.MapJsonKey("role", "role", "role");
+                    options.ClaimActions.MapJsonKey("sub", "sub", "sub");
                     options.TokenValidationParameters.NameClaimType = "name";
                     options.TokenValidationParameters.RoleClaimType = "role";
                     options.Scope.Add("chingari");

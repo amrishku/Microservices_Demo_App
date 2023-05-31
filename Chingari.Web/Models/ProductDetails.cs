@@ -1,8 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace Chingari.Services.OrderAPI.Models
+﻿namespace Chingari.Web.Models
 {
-    public class OrderDetails
+    public class ProductDetails
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -11,6 +9,5 @@ namespace Chingari.Services.OrderAPI.Models
         public string CategoryName { get; set; }
         public int Count { get; set; }
         public DateTime MessageCreated { get; set; }
-        public bool PaymentStatus { get; set; }
     }
 }
